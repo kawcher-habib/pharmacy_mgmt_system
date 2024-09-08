@@ -23,5 +23,6 @@ use Illuminate\Support\Facades\Route;
  */
 
  Route::get('/login', [AuthController::class, 'login']);
+ Route::get('/forgotpass', [AuthController::class, 'forgotpass']);
  Route::get('/reg', [AuthController::class, 'register']);
 
