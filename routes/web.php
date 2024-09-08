@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,8 @@ use Illuminate\Support\Facades\Route;
  Route::get('/forgotpass', [AuthController::class, 'forgotpass']);
  Route::get('/reg', [AuthController::class, 'register']);
 
+/**
+ * Admin Area
+ * 
+ */
+Route::get('/admin/dashboard', [DashboardController::class, 'dashboard']);
