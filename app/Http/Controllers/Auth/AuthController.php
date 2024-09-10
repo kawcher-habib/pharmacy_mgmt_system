@@ -35,7 +35,7 @@ class AuthController extends Controller
     // Registration Submit 
     public function registerSubmit(Request $request)
     {
-        dd($request);
+      
         $request->validate([
             'fname' => 'required',
             'lname' => 'required',
