@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 /**
- * Authentication 
+ * Authentication
+ * 
  */
 
  Route::get('/login', [AuthController::class, 'loginForm']);
@@ -34,7 +35,7 @@ use Illuminate\Support\Facades\Route;
  * Admin Area
  * 
  */
-Route::get('/admin/dashboard', [DashboardController::class, 'dashboard']);
+Route::get('/admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/check', function(){
     return response()->json(User::all());
-});
+})->middleware('admin');

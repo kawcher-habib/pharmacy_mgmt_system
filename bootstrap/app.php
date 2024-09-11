@@ -11,6 +11,9 @@
 |
 */
 
+use App\Http\Middleware\AdminMiddleware;
+use Illuminate\Foundation\Configuration\Middleware;
+
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
@@ -40,6 +43,7 @@ $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
 );
+
 
 /*
 |--------------------------------------------------------------------------

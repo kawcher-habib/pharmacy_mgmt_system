@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -17,7 +19,22 @@ class AuthController extends Controller
     //Login Submit Form
     public function loginSubmit(Request $request)
     {
-        dd($request);
+        $validation = Validator::make($request->all(),[
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        
+        if($validation->fails()){
+            return response()->json(['error'=> $validation->errors()], 400);
+        }
+
+      $user = User::where('email', $request->email)->first();
+      
+      if($user && Hash::check($request->password, $user->password) && $user->role == 1){
+            return redirect()->route('admin.dashboard');
+        }else{
+            return redirect()->route('login')->with(['error'=> "Email or Password is incorrect"]);
+        }
     }
 
     //Forgot Password
