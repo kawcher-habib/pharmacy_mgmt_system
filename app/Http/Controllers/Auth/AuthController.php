@@ -19,21 +19,25 @@ class AuthController extends Controller
     //Login Submit Form
     public function loginSubmit(Request $request)
     {
-        $validation = Validator::make($request->all(),[
+        $validation = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        
-        if($validation->fails()){
-            return response()->json(['error'=> $validation->errors()], 400);
+
+        if ($validation->fails()) {
+            return response()->json(['error' => $validation->errors()], 400);
         }
 
-      $user = User::where('email', $request->email)->first();
-      
-      if($user && Hash::check($request->password, $user->password) && $user->role == 1){
-            return redirect()->route('admin.dashboard');
+        $user = User::where('email', $request->email)->first();
+        if ($user->status != 'pending' &&  !empty($user)) {
+
+            if ($user && Hash::check($request->password, $user->password) && $user->role == 1) {
+                return redirect()->route('admin.dashboard');
+            } else {
+                return redirect()->route('login')->with(['error' => "Email or Password is incorrect"]);
+            }
         }else{
-            return redirect()->route('login')->with(['error'=> "Email or Password is incorrect"]);
+            return redirect()->back()->with(['error'=> "Your Status is $user->status"]);
         }
     }
 
@@ -52,7 +56,7 @@ class AuthController extends Controller
     // Registration Submit 
     public function registerSubmit(Request $request)
     {
-      
+
         $request->validate([
             'fname' => 'required',
             'lname' => 'required',
@@ -69,7 +73,7 @@ class AuthController extends Controller
                 'password' => bcrypt($request->input('password')),
                 'role' => 1
             ]);
-            return redirect()->route('/login')->with('success', 'Registration successful!');
+            return redirect()->route('login')->with('success', 'Registration successful!');
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Something went wrong. Pleaser try again']);
         }

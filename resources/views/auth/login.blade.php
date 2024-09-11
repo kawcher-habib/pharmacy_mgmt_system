@@ -22,6 +22,7 @@
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
                         <input type="text" name="email" class="form-control" id="yourEmail" required>
                         <div class="invalid-feedback">Please enter your email.</div>
+
                     </div>
                 </div>
 
@@ -30,6 +31,12 @@
                     <input type="password" name="password" class="form-control" id="yourPassword" required>
                     <div class="invalid-feedback">Please enter your password!</div>
                 </div>
+
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
 
                 <div class="col-12">
                     <p><a href="{{ url('/forgotpass') }}"> Forgot Password</a></p>

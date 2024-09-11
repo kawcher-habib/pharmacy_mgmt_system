@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('fname');
             $table->string('lname');
             $table->string('email')->unique();
-            $table->tinyInteger('role')->default(1);
+            $table->tinyInteger('role')->default(0);
+            $table->string('status')->default('pending');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
