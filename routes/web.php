@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
  Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
  Route::post('/login/submit', [AuthController::class, 'loginSubmit']);
  Route::get('/forgotpass', [AuthController::class, 'forgotpass']);
+ Route::post('/forgotpass/submit', [AuthController::class,'forgotPassSubmit']);
  Route::get('/reg', [AuthController::class, 'register']);
  Route::post('/reg/submit', [AuthController::class, 'registerSubmit']);
 
@@ -35,7 +36,11 @@ use Illuminate\Support\Facades\Route;
  * Admin Area
  * 
  */
-Route::get('/admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard')->middleware('admin');
+Route::get('/admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/check', function(){
     return response()->json(User::all());
 });
+
+
+// Route::get('/permission', [DashboardController::class, 'approved_me']);
+

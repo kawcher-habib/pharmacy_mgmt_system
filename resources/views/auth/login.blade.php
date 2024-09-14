@@ -14,6 +14,7 @@
                 <p class="text-center small">Enter your email & password to login</p>
             </div>
 
+                @include('showmessage.showmessage')
             <form method="POST" action="{{ url('login/submit') }}" class="row g-3 needs-validation" novalidate>
                 @csrf
                 <div class="col-12">
@@ -32,11 +33,7 @@
                     <div class="invalid-feedback">Please enter your password!</div>
                 </div>
 
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
+              
 
                 <div class="col-12">
                     <p><a href="{{ url('/forgotpass') }}"> Forgot Password</a></p>

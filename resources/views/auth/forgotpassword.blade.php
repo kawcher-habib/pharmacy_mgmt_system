@@ -10,7 +10,8 @@
                     <p class="text-center small">Enter your email</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form method="POST" action="{{url('/forgotpass/submit')}}" class="row g-3 needs-validation" novalidate>
+                    @csrf
 
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Email</label>
