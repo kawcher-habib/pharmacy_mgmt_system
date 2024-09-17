@@ -13,8 +13,10 @@ class EmailController extends Controller
         $toEmail = $email;
         $message = "Hello this email form pharmacy mgmnt system";
         $subject = "Reset new Passwrod";
+        $rendomPassword =  Str::password(12, symbols:true);
 
-        Mail::to($toEmail)->send(new ForgotPasswordEmail($message, $subject));
+        Mail::to($toEmail)->send(new ForgotPasswordEmail($message, $subject, $rendomPassword));
+
         return redirect()->route('login');
     }
 }

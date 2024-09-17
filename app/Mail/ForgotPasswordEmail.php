@@ -22,12 +22,12 @@ class ForgotPasswordEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($message, $subject)
+    public function __construct($message, $subject, $rendomPassword)
     {
         //
         $this->emailMessage = $message;
         $this->subject = $subject;
-        $this->rendomPassword = Str::password(12, symbols:true);
+        $this->rendomPassword = $rendomPassword;
     }
 
     /**

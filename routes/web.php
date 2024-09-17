@@ -36,7 +36,7 @@ use Illuminate\Support\Facades\Route;
  * Admin Area
  * 
  */
-Route::get('/admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard')->middleware('admin');
 Route::get('/check', function(){
     return response()->json(User::all());
 });
